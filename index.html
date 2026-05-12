@@ -5,81 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elite Estates | Real Estate High-Performance</title>
     <style>
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
-        header { background-color: #1a1a1a; color: #fff; padding: 40px 0; text-align: center; border-bottom: 3px solid #c5a059; }
-        nav { display: flex; justify-content: center; background: #222; padding: 15px; }
-        nav a { color: #fff; text-decoration: none; margin: 0 20px; font-weight: bold; text-transform: uppercase; font-size: 0.9em; }
-        nav a:hover { color: #c5a059; }
-        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; height: 500px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; }
-        .hero h1 { font-size: 3.5em; margin: 0; letter-spacing: 2px; }
-        .container { width: 85%; max-width: 1200px; margin: 50px auto; background: #fff; padding: 50px; box-shadow: 0 0 30px rgba(0,0,0,0.1); }
-        .section-title { border-left: 6px solid #c5a059; padding-left: 20px; margin-bottom: 30px; font-size: 2em; text-transform: uppercase; }
-        .contact-form { max-width: 700px; margin: 0 auto; padding: 30px; border: 1px solid #eee; background: #fafafa; }
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #1a1a1a; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 0; box-sizing: border-box; font-size: 1em; }
-        .captcha-box { margin: 25px 0; padding: 20px; background: #f0f0f0; border: 2px dashed #c5a059; text-align: center; }
-        .btn-submit { background-color: #1a1a1a; color: #c5a059; padding: 15px 35px; border: 2px solid #c5a059; cursor: pointer; font-size: 1.2em; font-weight: bold; width: 100%; text-transform: uppercase; transition: 0.3s; }
-        .btn-submit:hover { background-color: #c5a059; color: #1a1a1a; }
-        footer { text-align: center; padding: 30px; background: #1a1a1a; color: #666; margin-top: 60px; }
+        :root { --gold: #c5a059; --black: #121212; --gray: #222; --white: #ffffff; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: #f4f4f4; color: var(--black); }
+        
+        /* Navegación */
+        nav { background: var(--black); padding: 20px; display: flex; justify-content: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
+        nav a { color: var(--white); text-decoration: none; margin: 0 20px; font-weight: 700; text-transform: uppercase; font-size: 0.9em; cursor: pointer; transition: 0.3s; }
+        nav a:hover { color: var(--gold); }
+
+        /* Contenedores de Sección */
+        .section { display: none; padding: 80px 20px; max-width: 1200px; margin: 0 auto; min-height: 80vh; }
+        .active { display: block; animation: fadeIn 0.6s ease-in-out; }
+
+        /* HOME: Autoridad Visual */
+        .home-content { text-align: center; background: var(--white); padding: 60px; box-shadow: 15px 15px 0px var(--gold); border: 1px solid #ddd; }
+        .home-content h1 { font-size: 3.5em; line-height: 1; margin-bottom: 20px; text-transform: uppercase; }
+        .hero-img { width: 100%; height: 450px; object-fit: cover; margin-top: 30px; filter: grayscale(50%); }
+
+        /* CONTACTO: El Laboratorio del Sentinel */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; background: var(--white); padding: 50px; border: 1px solid #eee; }
+        .contact-info h2 { font-size: 2.5em; text-transform: uppercase; border-bottom: 4px solid var(--gold); display: inline-block; margin-bottom: 20px; }
+        .contact-info p { font-size: 1.1em; color: #555; }
+
+        form { display: flex; flex-direction: column; }
+        label { font-weight: 800; text-transform: uppercase; margin-bottom: 8px; font-size: 0.8em; }
+        input, textarea { padding: 15px; margin-bottom: 25px; border: 1px solid #ccc; background: #f9f9f9; font-size: 1em; border-radius: 0; }
+        input:focus { border-color: var(--gold); outline: none; }
+
+        .captcha-wrapper { background: #f0f0f0; padding: 20px; border: 1px solid #ddd; margin-bottom: 25px; display: flex; justify-content: center; }
+        
+        .btn-trigger { background: var(--black); color: var(--gold); padding: 20px; border: 2px solid var(--gold); font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.4s; letter-spacing: 2px; }
+        .btn-trigger:hover { background: var(--gold); color: var(--white); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        footer { background: var(--black); color: #444; text-align: center; padding: 40px; margin-top: 100px; font-weight: bold; }
     </style>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function navigate(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
 </head>
-<body>
-
-<header>
-    <h1>ELITE ESTATES</h1>
-    <p>Inversiones Inmobiliarias con Lógica Shelby</p>
-</header>
+<body onload="navigate('home')">
 
 <nav>
-    <a href="#">Catálogo</a>
-    <a href="#">Inversiones</a>
-    <a href="#">Estrategia</a>
-    <a href="#contacto">Contacto Directo</a>
+    <a onclick="navigate('home')">Home</a>
+    <a onclick="navigate('catalog')">Inmuebles</a>
+    <a onclick="navigate('contact')">Contacto</a>
 </nav>
 
-<div class="hero">
-    <h1>EL MAPA ES EL TERRITORIO</h1>
-    <p>Propiedades exclusivas gestionadas con latencia cero.</p>
-</div>
-
-<div class="container" id="contacto">
-    <h2 class="section-title">Intercepción de Inversores</h2>
-    <p>Si tu lógica es la correcta, nuestro sistema te permitirá el acceso.</p>
-    
-    <div class="contact-form">
-        <form id="sentinel-test-form" action="#" method="POST">
-            <div class="form-group">
-                <label for="nombre">Identidad del Operador</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre completo..." required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Canal de Comunicación (Email)</label>
-                <input type="email" id="email" name="email" placeholder="email@corporativo.com" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="mensaje">Propuesta de Valor / Activos</label>
-                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe aquí los detalles del flujo..."></textarea>
-            </div>
-            
-            <div class="captcha-box">
-                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
-                <p style="font-size: 0.75em; color: #d9534f; margin-top: 10px; font-weight: bold;">
-                    ADVERTENCIA: Verificación de Integridad del Sistema Requerida.
-                </p>
-            </div>
-            
-            <button type="submit" class="btn-submit">Ejecutar Solicitud</button>
-        </form>
+<section id="home" class="section active">
+    <div class="home-content">
+        <h1>Arquitectura de<br><span style="color:var(--gold)">Activos Reales</span></h1>
+        <p>Eliminamos la latencia entre el capital y la propiedad. Inversiones bajo el Protocolo 10X.</p>
+        <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1200&q=80" class="hero-img" alt="Luxury Real Estate">
     </div>
-</div>
+</section>
+
+<section id="catalog" class="section">
+    <h2 style="text-transform:uppercase; letter-spacing: 2px;">Catálogo de Invasión</h2>
+    <hr style="border: 2px solid var(--gold); width: 50px; margin: 20px 0;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div style="background:white; padding:15px; border: 1px solid #ddd;">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80" style="width:100%;">
+            <h3>Residencia Sentinel I</h3>
+        </div>
+        <div style="background:white; padding:15px; border: 1px solid #ddd;">
+            <img src="https://images.unsplash.com/photo-1600607687940-4e524cb35a3a?auto=format&fit=crop&w=500&q=80" style="width:100%;">
+            <h3>Centro Logístico 10X</h3>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section">
+    <div class="contact-grid">
+        <div class="contact-info">
+            <h2>Contacto</h2>
+            <p>Establece el referente de comunicación. Este canal está monitorizado por el Sentinel 11S para asegurar latencia cero en la respuesta.</p>
+            <p style="margin-top:20px; font-weight:bold; color: var(--gold);">SISTEMA DE SEGURIDAD RECAPTCHA ACTIVADO.</p>
+        </div>
+        <div class="contact-form">
+            <form action="#" method="POST">
+                <label>Nombre del Operador</label>
+                <input type="text" name="name" placeholder="Tu nombre..." required>
+                
+                <label>Email de Enlace</label>
+                <input type="email" name="email" placeholder="tu@empresa.com" required>
+                
+                <label>Mensaje / Lógica de Negocio</label>
+                <textarea name="message" rows="5" placeholder="Describe el flujo..."></textarea>
+                
+                <div class="captcha-wrapper">
+                    <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                </div>
+                
+                <button type="submit" class="btn-trigger">Ejecutar Envío 10X</button>
+            </form>
+        </div>
+    </div>
+</section>
 
 <footer>
-    &copy; 2026 Elite Estates | Protocolo 10X² | Bajo Vigilancia del Arquitecto.
-</footer>
-
-</body>
-</html>
+    ELITE ESTATES &copy; 2026 | BA
