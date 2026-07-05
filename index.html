@@ -2,111 +2,41 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Estates | Real Estate High-Performance</title>
+    <title>Elite Estates | Real Estate</title>
     <style>
-        :root { --gold: #c5a059; --black: #121212; --gray: #222; --white: #ffffff; }
-        body { font-family: 'Inter', sans-serif; margin: 0; background: #f4f4f4; color: var(--black); }
-        
-        /* Navegación */
-        nav { background: var(--black); padding: 20px; display: flex; justify-content: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
-        nav a { color: var(--white); text-decoration: none; margin: 0 20px; font-weight: 700; text-transform: uppercase; font-size: 0.9em; cursor: pointer; transition: 0.3s; }
-        nav a:hover { color: var(--gold); }
-
-        /* Contenedores de Sección */
-        .section { display: none; padding: 80px 20px; max-width: 1200px; margin: 0 auto; min-height: 80vh; }
-        .active { display: block; animation: fadeIn 0.6s ease-in-out; }
-
-        /* HOME: Autoridad Visual */
-        .home-content { text-align: center; background: var(--white); padding: 60px; box-shadow: 15px 15px 0px var(--gold); border: 1px solid #ddd; }
-        .home-content h1 { font-size: 3.5em; line-height: 1; margin-bottom: 20px; text-transform: uppercase; }
-        .hero-img { width: 100%; height: 450px; object-fit: cover; margin-top: 30px; filter: grayscale(50%); }
-
-        /* CONTACTO: El Laboratorio del Sentinel */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; background: var(--white); padding: 50px; border: 1px solid #eee; }
-        .contact-info h2 { font-size: 2.5em; text-transform: uppercase; border-bottom: 4px solid var(--gold); display: inline-block; margin-bottom: 20px; }
-        .contact-info p { font-size: 1.1em; color: #555; }
-
+        :root { --gold: #c5a059; --black: #121212; --white: #ffffff; }
+        body { font-family: sans-serif; background: #f4f4f4; margin: 0; }
+        nav { background: var(--black); padding: 20px; display: flex; justify-content: center; }
+        nav a { color: var(--white); margin: 0 20px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
+        .section { display: none; padding: 50px; max-width: 800px; margin: 0 auto; background: white; }
+        .active { display: block; }
         form { display: flex; flex-direction: column; }
-        label { font-weight: 800; text-transform: uppercase; margin-bottom: 8px; font-size: 0.8em; }
-        input, textarea { padding: 15px; margin-bottom: 25px; border: 1px solid #ccc; background: #f9f9f9; font-size: 1em; border-radius: 0; }
-        input:focus { border-color: var(--gold); outline: none; }
-
-        .captcha-wrapper { background: #f0f0f0; padding: 20px; border: 1px solid #ddd; margin-bottom: 25px; display: flex; justify-content: center; }
-        
-        .btn-trigger { background: var(--black); color: var(--gold); padding: 20px; border: 2px solid var(--gold); font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.4s; letter-spacing: 2px; }
-        .btn-trigger:hover { background: var(--gold); color: var(--white); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        footer { background: var(--black); color: #444; text-align: center; padding: 40px; margin-top: 100px; font-weight: bold; }
+        input, textarea { padding: 15px; margin: 10px 0; border: 1px solid #ccc; }
+        .btn-trigger { background: var(--black); color: var(--gold); padding: 20px; cursor: pointer; border: none; font-weight: bold; }
     </style>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-        function navigate(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-    </script>
 </head>
-<body onload="navigate('home')">
-
+<body>
 <nav>
     <a onclick="navigate('home')">Home</a>
-    <a onclick="navigate('catalog')">Inmuebles</a>
     <a onclick="navigate('contact')">Contacto</a>
 </nav>
-
 <section id="home" class="section active">
-    <div class="home-content">
-        <h1>Arquitectura de<br><span style="color:var(--gold)">Activos Reales</span></h1>
-        <p>Eliminamos la latencia entre el capital y la propiedad. Inversiones bajo el Protocolo 10X.</p>
-        <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1200&q=80" class="hero-img" alt="Luxury Real Estate">
-    </div>
+    <h1>Arquitectura de Activos</h1>
 </section>
-
-<section id="catalog" class="section">
-    <h2 style="text-transform:uppercase; letter-spacing: 2px;">Catálogo de Invasión</h2>
-    <hr style="border: 2px solid var(--gold); width: 50px; margin: 20px 0;">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-        <div style="background:white; padding:15px; border: 1px solid #ddd;">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80" style="width:100%;">
-            <h3>Residencia Sentinel I</h3>
-        </div>
-        <div style="background:white; padding:15px; border: 1px solid #ddd;">
-            <img src="https://images.unsplash.com/photo-1600607687940-4e524cb35a3a?auto=format&fit=crop&w=500&q=80" style="width:100%;">
-            <h3>Centro Logístico 10X</h3>
-        </div>
-    </div>
-</section>
-
 <section id="contact" class="section">
-    <div class="contact-grid">
-        <div class="contact-info">
-            <h2>Contacto</h2>
-            <p>Establece el referente de comunicación. Este canal está monitorizado por el Sentinel 11S para asegurar latencia cero en la respuesta.</p>
-            <p style="margin-top:20px; font-weight:bold; color: var(--gold);">SISTEMA DE SEGURIDAD RECAPTCHA ACTIVADO.</p>
-        </div>
-        <div class="contact-form">
-            <form action="#" method="POST">
-                <label>Nombre del Operador</label>
-                <input type="text" name="name" placeholder="Tu nombre..." required>
-                
-                <label>Email de Enlace</label>
-                <input type="email" name="email" placeholder="tu@empresa.com" required>
-                
-                <label>Mensaje / Lógica de Negocio</label>
-                <textarea name="message" rows="5" placeholder="Describe el flujo..."></textarea>
-                
-                <div class="captcha-wrapper">
-                    <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
-                </div>
-                
-                <button type="submit" class="btn-trigger">Ejecutar Envío 10X</button>
-            </form>
-        </div>
-    </div>
+    <h2>Contacto</h2>
+    <form id="contact-form" action="#" method="POST">
+        <input type="text" name="name" id="name" placeholder="Tu nombre..." required>
+        <input type="email" name="email" id="email" placeholder="tu@empresa.com" required>
+        <textarea name="message" id="message" placeholder="Tu mensaje..."></textarea>
+        <button type="submit" class="btn-trigger">Ejecutar Envío 10X</button>
+    </form>
 </section>
-
-<footer>
-    ELITE ESTATES &copy; 2026 | BA
+<script>
+    function navigate(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+</script>
+</body>
+</html>
